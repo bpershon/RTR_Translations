@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>bpershon WebGL &mdash; lab3 </title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+<script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
+<!--  ************** Fragment Shader ************* --> 
+<script id="shader-fs" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 vColor; 
+
+void main(void) {
+        gl_FragColor = vColor; 
+    }
+</script>
+
+<!--  ************** Vertex Shader ************* --> 
+<script id="shader-vs" type="x-shader/x-vertex">
+
+    attribute vec3 aVertexPosition;
+    attribute vec4 aVertexColor;
+    varying vec4 vColor;
+
+   uniform mat4 uMVMatrix;
+   uniform mat4 uPMatrix; 
+
+
+    void main(void) {
+
+     gl_PointSize = 10.0; 
+
+      gl_Position = uPMatrix* uMVMatrix*vec4(aVertexPosition, 1.0);
+
+      vColor = aVertexColor; 
+    }
+</script>
+
+
+<script type="text/javascript" src="shaders_setup.js"></script>
+<script type="text/javascript" src="lab3.js"></script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+    <canvas id="code03-canvas"style="border:none;"width="700"height="700"></canvas>
+
+    <h4> Camera Controls (Camera Position):  </h4>
+    <button  onclick="moveCOIX(1)"> Right</button>
+    <button  onclick="moveCOIX(-1)"> Left</button>
+    <button  onclick="moveCOIY(1)"> Up</button>
+    <button  onclick="moveCOIY(-1)"> Down</button>
+	<button  onclick="rotateByY(15)"> Pan</button>
+
+    <div>
+    <h4>
+    Click on the left mouse button and move the coursor to rotate about the Z axis
+    </h4>
+    <button  onclick="redraw()"> Go Back! </button>
+    </div>
+
+ <div>
+        <h3>
+          <div id="title"> lab3.html COMMENTS</div>
+        </h3>
+        <h5>
+           A simple 3D rendering of a cube, sphere, cylinder
+	  </h5> 
+  </div>
+
+  
+    
+
+</body>
+
+</html>
+
